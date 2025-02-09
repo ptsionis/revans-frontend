@@ -8,5 +8,7 @@ export interface UserInterface {
   name: string
   pictureUrl?: string | null
   score: number
-  createdAt: Date
+  gamesPlayed: number
+  gamesWon: number
+  createdAt: string
 }

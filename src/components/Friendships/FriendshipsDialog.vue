@@ -2,6 +2,9 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -21,7 +24,13 @@ import FriendsList from './FriendsList.vue'
       </Button>
     </DialogTrigger>
     <DialogContent class="py-12 h-[400px]">
-      <Tabs default-value="account" class="w-full">
+      <DialogHeader class="h-fit">
+        <DialogTitle>Edit profile</DialogTitle>
+        <DialogDescription>
+          Challenge your friends and respond to incoming challenges. You can also see who is online and manage your friend requests.
+        </DialogDescription>
+      </DialogHeader>
+      <Tabs default-value="account" class="w-full h-[200px]">
         <TabsList class="w-full flex justify-around">
           <TabsTrigger class="w-full" value="friends">
             Friends

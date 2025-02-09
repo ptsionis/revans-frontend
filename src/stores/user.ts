@@ -9,8 +9,10 @@ export const useUserStore = defineStore('user', () => {
     name: '',
     role: UserRole.USER,
     score: 0,
+    gamesPlayed: 0,
+    gamesWon: 0,
     pictureUrl: '',
-    createdAt: new Date(),
+    createdAt: '',
   })
 
   function setUserStore(data: UserInterface) {
@@ -23,8 +25,10 @@ export const useUserStore = defineStore('user', () => {
       name: '',
       role: UserRole.USER,
       score: 0,
+      gamesPlayed: 0,
+      gamesWon: 0,
       pictureUrl: '',
-      createdAt: new Date(),
+      createdAt: '',
     }
   }
 
