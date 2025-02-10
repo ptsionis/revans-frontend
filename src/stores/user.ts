@@ -1,4 +1,5 @@
 import type { UserInterface } from '@/types/user'
+import { UserAvailability } from '@/enums/userAvailability'
 import { UserRole } from '@/enums/userRole'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -13,6 +14,7 @@ export const useUserStore = defineStore('user', () => {
     gamesWon: 0,
     pictureUrl: '',
     createdAt: '',
+    availability: UserAvailability.OFFLINE,
   })
 
   function setUserStore(data: UserInterface) {
@@ -29,6 +31,7 @@ export const useUserStore = defineStore('user', () => {
       gamesWon: 0,
       pictureUrl: '',
       createdAt: '',
+      availability: UserAvailability.OFFLINE,
     }
   }
 

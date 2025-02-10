@@ -1,3 +1,4 @@
+import type { UserAvailability } from '@/enums/userAvailability'
 import type { UserRole } from '@/enums/userRole'
 
 export interface UserInterface {
@@ -11,4 +12,5 @@ export interface UserInterface {
   gamesPlayed: number
   gamesWon: number
   createdAt: string
+  availability?: UserAvailability
 }

@@ -10,30 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { useSocket } from '@/composables/useSocket'
 import { getRankName } from '@/utils/rank'
 import { Icon } from '@iconify/vue'
-import { onMounted, ref, watch } from 'vue'
 
-const props = defineProps({
+defineProps({
   isUserProfile: { type: Boolean, required: true },
   id: { type: String, required: true },
   name: { type: String, required: true },
+  availability: { type: String, required: true },
   pictureUrl: String,
   score: { type: Number, required: true },
   createdAt: { type: String, required: true },
-})
-
-const { socket } = useSocket()
-const availability = ref<string>('')
-
-onMounted(() => {
-  if (!props.isUserProfile) {
-    socket.emit('get_availability', props.id)
-    socket.on('user_availability', (data: string) => {
-      availability.value = data
-    })
-  }
 })
 </script>
 
@@ -46,7 +33,7 @@ onMounted(() => {
             <AvatarImage :src="pictureUrl ? pictureUrl : ''" :alt="name" />
             <AvatarFallback>{{ name.slice(0, 1) }}</AvatarFallback>
           </Avatar>
-          <AvailabilityBadge v-if="!isUserProfile" :id="name" :availability="availability" />
+          <AvailabilityBadge :id="name" :availability="availability" />
         </div>
         <span v-if="!isUserProfile" class="font-light">{{ name }}</span>
         <div v-if="!isUserProfile" class="text-2xl">
