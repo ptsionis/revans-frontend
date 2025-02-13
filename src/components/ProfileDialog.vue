@@ -17,7 +17,7 @@ defineProps({
   isUserProfile: { type: Boolean, required: true },
   id: { type: String, required: true },
   name: { type: String, required: true },
-  availability: { type: String, required: true },
+  availability: { type: String, required: false },
   pictureUrl: String,
   score: { type: Number, required: true },
   createdAt: { type: String, required: true },
@@ -30,14 +30,14 @@ defineProps({
       <div class="flex items-center space-x-3">
         <div class="relative">
           <Avatar class="relative" title="Profile Information">
-            <AvatarImage :src="pictureUrl ? pictureUrl : ''" :alt="name" />
+            <AvatarImage :src="pictureUrl ?? ''" :alt="name" />
             <AvatarFallback>{{ name.slice(0, 1) }}</AvatarFallback>
           </Avatar>
-          <AvailabilityBadge :id="name" :availability="availability" />
+          <AvailabilityBadge v-if="availability" :id="name" :availability="availability" />
         </div>
         <span v-if="!isUserProfile" class="font-light">{{ name }}</span>
         <div v-if="!isUserProfile" class="text-2xl">
-          <RankIcon :rank="score" />
+          <RankIcon v-if="availability" :rank="score" />
         </div>
       </div>
     </DialogTrigger>
@@ -49,6 +49,10 @@ defineProps({
         </DialogDescription>
       </DialogHeader>
       <div class="flex flex-col justify-center items-start space-y-3">
+        <Avatar class="relative" size="base">
+          <AvatarImage :src="pictureUrl ?? ''" :alt="name" />
+          <AvatarFallback>{{ name.slice(0, 1) }}</AvatarFallback>
+        </Avatar>
         <div class="flex justify-center items-center text-2xl space-x-2">
           <Icon icon="material-symbols:person" />
           <span class="font-light text-sm text-foreground/75">{{ name }}</span>

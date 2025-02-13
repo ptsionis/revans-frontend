@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import Button from '@/components/ui/button/Button.vue'
 import { Icon } from '@iconify/vue'
-import Button from './ui/button/Button.vue'
 
 defineProps({
   text: String,
@@ -12,6 +12,6 @@ defineProps({
 
 <template>
   <Button @click="callback">
-    {{ text }} <Icon :icon="icon ? icon : ''" />
+    {{ text }} <Icon :icon="icon ?? ''" />
   </Button>
 </template>

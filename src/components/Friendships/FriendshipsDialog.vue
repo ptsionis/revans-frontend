@@ -30,7 +30,7 @@ const { onlineFriendsCounter, friendRequestsCounter } = useFriendship()
       <DialogHeader class="h-fit">
         <DialogTitle>Friends & Requests</DialogTitle>
         <DialogDescription>
-          Challenge your friends and respond to incoming challenges. You can also see who is online and manage your friend requests.
+          Challenge your friends, respond to challenges, manage your friend requests.
         </DialogDescription>
       </DialogHeader>
       <Tabs default-value="account" class="w-full h-[200px]">
