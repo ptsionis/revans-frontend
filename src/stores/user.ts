@@ -47,6 +47,7 @@ export const useUserStore = defineStore('user', () => {
       createdAt: '',
       availability: UserAvailability.OFFLINE,
     }
+    onlineUsersCounter.value = 0
   }
 
   return { user, onlineUsersCounter, setUserStore, bindEvents, $reset }
