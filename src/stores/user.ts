@@ -1,6 +1,7 @@
 import type { UserInterface } from '@/types/user'
 import { UserAvailability } from '@/enums/userAvailability'
 import { UserRole } from '@/enums/userRole'
+import { socket } from '@/socket'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -16,9 +17,19 @@ export const useUserStore = defineStore('user', () => {
     createdAt: '',
     availability: UserAvailability.OFFLINE,
   })
+  const onlineUsersCounter = ref<number>(0)
 
   function setUserStore(data: UserInterface) {
     user.value = data
+  }
+
+  function bindEvents() {
+    socket.on('user_init', (data: UserInterface) => {
+      setUserStore(data)
+    })
+    socket.on('online_users_counter', (data: number) => {
+      onlineUsersCounter.value = data
+    })
   }
 
   function $reset() {
@@ -35,5 +46,5 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  return { user, setUserStore, $reset }
+  return { user, onlineUsersCounter, setUserStore, bindEvents, $reset }
 })
