@@ -24,10 +24,10 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function bindEvents() {
-    socket.on('user_init', (data: UserInterface) => {
+    socket.on('user:init', (data: UserInterface) => {
       setUserStore(data)
     })
-    socket.on('online_users_counter', (data: number) => {
+    socket.on('user:online_counter', (data: number) => {
       onlineUsersCounter.value = data
     })
     socket.on('disconnect', () => {

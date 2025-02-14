@@ -8,7 +8,7 @@ const props = defineProps({
 })
 
 function acceptFriendRequest() {
-  socket.emit('accept_friend_request', props.id)
+  socket.emit('friendship:accept_friend_request', props.id)
 }
 </script>
 

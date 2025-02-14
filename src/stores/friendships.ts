@@ -49,19 +49,19 @@ export const useFriendshipsStore = defineStore('friendships', () => {
   }
 
   function bindEvents() {
-    socket.on('set_friends', (data: UserInterface[]) => {
+    socket.on('user:set_friends', (data: UserInterface[]) => {
       setFriendshipsStore(data)
     })
-    socket.on('friend_connected', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
+    socket.on('user:friend_connected', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
       setFriendAvailability(friendId, availability)
     })
-    socket.on('friend_disconnected', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
+    socket.on('user:friend_disconnected', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
       setFriendAvailability(friendId, availability)
     })
-    socket.on('set_friend_requests', (data: UserInterface[]) => {
+    socket.on('user:set_friend_requests', (data: UserInterface[]) => {
       setFriendRequestsStore(data)
     })
-    socket.on('friend_request_accepted', ({ friend, availability }: { friend: UserInterface, availability: UserAvailability }) => {
+    socket.on('friendship:friend_request_accepted', ({ friend, availability }: { friend: UserInterface, availability: UserAvailability }) => {
       addFriendship(friend)
       setFriendAvailability(friend.id, availability)
       removeFriendRequest(friend.id)
@@ -70,7 +70,7 @@ export const useFriendshipsStore = defineStore('friendships', () => {
         description: `You are now friends with ${friend.name}.`,
       })
     })
-    socket.on('friend_request_deleted', (data: string) => {
+    socket.on('friendship:friend_request_deleted', (data: string) => {
       removeFriendRequest(data)
     })
     socket.on('disconnect', () => {

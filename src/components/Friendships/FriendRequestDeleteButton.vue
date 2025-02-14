@@ -8,7 +8,7 @@ const props = defineProps({
 })
 
 function deleteFriendRequest() {
-  socket.emit('delete_friend_request', props.id)
+  socket.emit('friendship:delete_friend_request', props.id)
 }
 </script>
 
