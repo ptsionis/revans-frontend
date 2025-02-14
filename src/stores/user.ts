@@ -30,6 +30,9 @@ export const useUserStore = defineStore('user', () => {
     socket.on('online_users_counter', (data: number) => {
       onlineUsersCounter.value = data
     })
+    socket.on('disconnect', () => {
+      $reset()
+    })
   }
 
   function $reset() {

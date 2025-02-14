@@ -73,6 +73,9 @@ export const useFriendshipsStore = defineStore('friendships', () => {
     socket.on('friend_request_deleted', (data: string) => {
       removeFriendRequest(data)
     })
+    socket.on('disconnect', () => {
+      $reset()
+    })
   }
 
   function $reset() {
