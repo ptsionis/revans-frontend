@@ -21,7 +21,7 @@ export const useUserStore = defineStore('user', () => {
     user.value = data
   }
 
-  function resetUserStore() {
+  function $reset() {
     user.value = {
       id: '',
       name: '',
@@ -35,5 +35,5 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  return { user, setUserStore, resetUserStore }
+  return { user, setUserStore, $reset }
 })

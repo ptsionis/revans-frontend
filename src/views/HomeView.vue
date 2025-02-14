@@ -5,8 +5,11 @@ import FriendshipsDialog from '@/components/Friendships/FriendshipsDialog.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
 import PlayButton from '@/components/PlayButton.vue'
 import ProfileDialog from '@/components/ProfileDialog.vue'
+import Toaster from '@/components/ui/toast/Toaster.vue'
+import { useToast } from '@/components/ui/toast/use-toast'
 import { useSocket } from '@/composables/useSocket'
 import { UserAvailability } from '@/enums/userAvailability'
+import { useFriendRequestsStore } from '@/stores/friendRequests'
 import { useFriendshipsStore } from '@/stores/friendships'
 import { useUserStore } from '@/stores/user'
 import { onBeforeMount, onMounted, ref } from 'vue'
@@ -14,8 +17,10 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const { socket } = useSocket()
+const { toast } = useToast()
 const userStore = useUserStore()
 const friendshipsStore = useFriendshipsStore()
+const friendRequestsStore = useFriendRequestsStore()
 const onlineUsersCounter = ref(0)
 
 onBeforeMount(() => {
@@ -36,16 +41,28 @@ onMounted(() => {
     friendshipsStore.setFriendshipsStore(data)
   })
   socket.on('set_friend_requests', (data: UserInterface[]) => {
-    friendshipsStore.setFriendRequestsStore(data)
+    friendRequestsStore.setFriendRequestsStore(data)
   })
   socket.on('online_users_counter', (data: number) => {
     onlineUsersCounter.value = data
   })
-  socket.on('friend_connected', (data: string) => {
-    friendshipsStore.setFriendOnline(data)
+  socket.on('friend_connected', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
+    friendshipsStore.setFriendAvailability(friendId, availability)
   })
-  socket.on('friend_disconnected', (data: string) => {
-    friendshipsStore.setFriendOffline(data)
+  socket.on('friend_disconnected', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
+    friendshipsStore.setFriendAvailability(friendId, availability)
+  })
+  socket.on('friend_request_accepted', ({ friend, availability }: { friend: UserInterface, availability: UserAvailability }) => {
+    friendshipsStore.addFriendship(friend)
+    friendshipsStore.setFriendAvailability(friend.id, availability)
+    friendRequestsStore.removeFriendRequest(friend.id)
+    toast({
+      title: 'You have a new friend!',
+      description: `You are now friends with ${friend.name}.`,
+    })
+  })
+  socket.on('friend_request_deleted', (data: string) => {
+    friendRequestsStore.removeFriendRequest(data)
   })
 })
 </script>
@@ -53,6 +70,7 @@ onMounted(() => {
 <template>
   <div class="min-h-dvh flex flex-col justify-center items-center">
     <main class="w-full flex flex-col flex-1 px-12 py-8">
+      <Toaster />
       <div class="flex flex-col flex-1 justify-center items-center">
         <div class="flex flex-col items-center space-y-2">
           <PlayButton />

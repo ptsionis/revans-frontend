@@ -1,41 +1,36 @@
+import type { UserAvailability } from '@/enums/userAvailability'
 import type { UserInterface } from '@/types/user'
-import { UserAvailability } from '@/enums/userAvailability'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useFriendshipsStore = defineStore('friendships', () => {
   const friendships = ref<UserInterface[]>([])
-  const friendRequests = ref<UserInterface[]>([])
 
   function setFriendshipsStore(data: UserInterface[]) {
     friendships.value = data
   }
 
-  function setFriendRequestsStore(data: UserInterface[]) {
-    friendRequests.value = data
+  function addFriendship(friend: UserInterface) {
+    friendships.value.push(friend)
   }
 
-  function resetFriendshipsStore() {
+  function removeFriendship(id: string) {
+    const index = friendships.value.findIndex(friend => friend.id === id)
+    if (index !== -1) {
+      friendships.value.splice(index, 1)
+    }
+  }
+
+  function setFriendAvailability(id: string, availability: UserAvailability) {
+    const friend = friendships.value.find(friend => friend.id === id)
+    if (friend) {
+      friend.availability = availability
+    }
+  }
+
+  function $reset() {
     friendships.value = []
   }
 
-  function resetFriendRequestsStore() {
-    friendRequests.value = []
-  }
-
-  function setFriendOnline(id: string) {
-    const friend = friendships.value.find(friend => friend.id === id)
-    if (friend) {
-      friend.availability = UserAvailability.ONLINE
-    }
-  }
-
-  function setFriendOffline(id: string) {
-    const friend = friendships.value.find(friend => friend.id === id)
-    if (friend) {
-      friend.availability = UserAvailability.OFFLINE
-    }
-  }
-
-  return { friendships, friendRequests, setFriendshipsStore, setFriendRequestsStore, resetFriendshipsStore, resetFriendRequestsStore, setFriendOnline, setFriendOffline }
+  return { friendships, setFriendshipsStore, addFriendship, removeFriendship, setFriendAvailability, $reset }
 })

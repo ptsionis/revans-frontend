@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <Button title="Play">
+  <Button size="icon" title="Play">
     <Icon icon="mingcute:sword-fill" />
   </Button>
 </template>

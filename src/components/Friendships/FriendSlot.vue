@@ -14,7 +14,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex justify-between items-center p-4 bg-background border border-muted rounded-md">
+  <div class="flex justify-between items-center p-4 bg-background border border-muted">
     <ProfileDialog :id="id" :availability="availability ?? UserAvailability.OFFLINE" :is-user-profile="false" :name="name" :picture-url="pictureUrl ?? ''" :score="score" :created-at="createdAt" />
     <div>
       <ChallengeButton v-if="availability === UserAvailability.ONLINE" />
