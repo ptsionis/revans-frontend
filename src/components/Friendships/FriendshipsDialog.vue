@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FriendAddSection from '@/components/Friendships/FriendAddSection.vue'
 import FriendRequestsList from '@/components/Friendships/FriendRequestsList.vue'
 import FriendshipsBadgeCounter from '@/components/Friendships/FriendshipsBadgeCounter.vue'
 import FriendsList from '@/components/Friendships/FriendsList.vue'
@@ -13,7 +14,7 @@ import {
 } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useFriendship } from '@/composables/useFriendship'
-import { Icon } from '@iconify/vue'
+import { UserRoundIcon } from 'lucide-vue-next'
 
 const { onlineFriendsCounter, friendRequestsCounter } = useFriendship()
 </script>
@@ -22,7 +23,7 @@ const { onlineFriendsCounter, friendRequestsCounter } = useFriendship()
   <Dialog>
     <DialogTrigger>
       <Button class="relative rounded-full px-3 py-5" title="See Friends">
-        <Icon icon="material-symbols:person" />
+        <UserRoundIcon />
         <FriendshipsBadgeCounter />
       </Button>
     </DialogTrigger>
@@ -30,7 +31,7 @@ const { onlineFriendsCounter, friendRequestsCounter } = useFriendship()
       <DialogHeader class="h-fit">
         <DialogTitle>Friends & Requests</DialogTitle>
         <DialogDescription>
-          Challenge your friends, respond to challenges, manage your friend requests.
+          Challenge friends, manage friend requests or add new.
         </DialogDescription>
       </DialogHeader>
       <Tabs default-value="account" class="w-full h-[200px]">
@@ -41,12 +42,18 @@ const { onlineFriendsCounter, friendRequestsCounter } = useFriendship()
           <TabsTrigger class="w-full" value="requests">
             Requests ({{ friendRequestsCounter }})
           </TabsTrigger>
+          <TabsTrigger class="w-full" value="add-friends">
+            Add Friend
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="friends">
           <FriendsList />
         </TabsContent>
         <TabsContent value="requests">
           <FriendRequestsList />
+        </TabsContent>
+        <TabsContent value="add-friends">
+          <FriendAddSection />
         </TabsContent>
       </Tabs>
     </DialogContent>

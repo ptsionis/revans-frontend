@@ -2,7 +2,7 @@ import { Ranks } from '@/enums/ranks'
 
 export function getRankIconString(score: number) {
   if (score < Ranks.RANK1) {
-    return 'noto:mouse-face'
+    return 'noto:baby-chick'
   }
   else if (score < Ranks.RANK2) {
     return 'noto:fox'

@@ -7,9 +7,11 @@ const friendshipsStore = useFriendshipsStore()
 </script>
 
 <template>
-  <ScrollArea class="list-none rounded-none">
-    <li v-for="friendship in friendshipsStore.friendships" :key="friendship.id">
-      <FriendSlot :id="friendship.id" :name="friendship.name" :availability="friendship.availability" :picture-url="friendship.pictureUrl ?? ''" :score="friendship.score" :created-at="friendship.createdAt" />
-    </li>
+  <ScrollArea class="w-full h-[200px] list-none rounded-none">
+    <ul>
+      <li v-for="friendship in friendshipsStore.friendships" :key="friendship.id">
+        <FriendSlot :id="friendship.id" :name="friendship.name" :availability="friendship.availability" :picture-url="friendship.pictureUrl ?? ''" :score="friendship.score" :created-at="friendship.createdAt" />
+      </li>
+    </ul>
   </ScrollArea>
 </template>

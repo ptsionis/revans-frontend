@@ -27,6 +27,9 @@ export const useUserStore = defineStore('user', () => {
     socket.on('user:init', (data: UserInterface) => {
       setUserStore(data)
     })
+    socket.on('user:availability', (availability: UserAvailability) => {
+      user.value.availability = availability
+    })
     socket.on('user:online_counter', (data: number) => {
       onlineUsersCounter.value = data
     })

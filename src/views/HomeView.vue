@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ChallengeDialog from '@/components/Challenge/ChallengeDialog.vue'
 import Footer from '@/components/Footer.vue'
 import FriendshipsDialog from '@/components/Friendships/FriendshipsDialog.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
@@ -7,6 +8,7 @@ import ProfileDialog from '@/components/ProfileDialog.vue'
 import Toaster from '@/components/ui/toast/Toaster.vue'
 import { UserAvailability } from '@/enums/userAvailability'
 import { socket } from '@/socket'
+import { useChallengeStore } from '@/stores/challenge'
 import { useConnectionStore } from '@/stores/connection'
 import { useFriendshipsStore } from '@/stores/friendships'
 import { useUserStore } from '@/stores/user'
@@ -17,6 +19,7 @@ const router = useRouter()
 const connectionStore = useConnectionStore()
 const userStore = useUserStore()
 const friendshipsStore = useFriendshipsStore()
+const challengeStore = useChallengeStore()
 
 onBeforeMount(() => {
   if (router.currentRoute.value.hash === '#_=_') {
@@ -29,12 +32,12 @@ connectionStore.connect()
 connectionStore.bindEvents()
 userStore.bindEvents()
 friendshipsStore.bindEvents()
+challengeStore.bindEvents()
 </script>
 
 <template>
   <div class="min-h-dvh flex flex-col justify-center items-center">
     <main class="w-full flex flex-col flex-1 px-12 py-8">
-      <Toaster />
       <div class="flex flex-col flex-1 justify-center items-center">
         <div class="flex flex-col items-center space-y-2">
           <PlayButton />
@@ -46,6 +49,8 @@ friendshipsStore.bindEvents()
         <FriendshipsDialog />
         <LogoutButton />
       </div>
+      <Toaster />
+      <ChallengeDialog />
     </main>
     <Footer />
   </div>

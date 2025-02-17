@@ -2,6 +2,7 @@
 import AvailabilityBadge from '@/components/AvailabilityBadge.vue'
 import RankIcon from '@/components/RankIcon.vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import Button from '@/components/ui/button/Button.vue'
 import {
   Dialog,
   DialogContent,
@@ -10,10 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { useToast } from '@/components/ui/toast/use-toast'
+import { useUserStore } from '@/stores/user'
 import { getRankName } from '@/utils/rank'
-import { Icon } from '@iconify/vue'
+import { CalendarDaysIcon, CopyIcon, HashIcon, TrophyIcon, User2Icon } from 'lucide-vue-next'
 
-defineProps({
+const props = defineProps({
   isUserProfile: { type: Boolean, required: true },
   id: { type: String, required: true },
   name: { type: String, required: true },
@@ -22,6 +25,15 @@ defineProps({
   score: { type: Number, required: true },
   createdAt: { type: String, required: true },
 })
+const userStore = useUserStore()
+const { toast } = useToast()
+
+function copyIdToClipboard() {
+  navigator.clipboard.writeText(props.id)
+  toast({
+    description: 'Id copied to clipboard!',
+  })
+}
 </script>
 
 <template>
@@ -54,11 +66,11 @@ defineProps({
           <AvatarFallback>{{ name.slice(0, 1) }}</AvatarFallback>
         </Avatar>
         <div class="flex justify-center items-center text-2xl space-x-2">
-          <Icon icon="material-symbols:person" />
+          <User2Icon />
           <span class="font-light text-sm text-foreground/75">{{ name }}</span>
         </div>
         <div class="flex justify-center items-center text-2xl space-x-2">
-          <Icon icon="material-symbols:calendar-month-outline-rounded" />
+          <CalendarDaysIcon />
           <span class="font-light text-sm text-foreground/75">Joined {{ new Date(createdAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -66,10 +78,17 @@ defineProps({
           }) }}</span>
         </div>
         <div class="flex justify-center items-center text-2xl space-x-2">
-          <Icon icon="game-icons:podium" />
+          <TrophyIcon />
           <span class="font-light text-sm text-foreground/75">{{ getRankName(score) }}</span>
           <RankIcon :rank="score" />
           <span class="font-light text-sm text-foreground/75">({{ score }} points)</span>
+        </div>
+        <div v-if="userStore.user.id === id" class="flex justify-center items-center text-2xl space-x-2">
+          <HashIcon />
+          <span class="font-light text-sm text-foreground/75">{{ id }}</span>
+          <Button size="icon" title="Copy" @click="copyIdToClipboard">
+            <CopyIcon class="cursor-pointer" />
+          </Button>
         </div>
       </div>
     </DialogContent>

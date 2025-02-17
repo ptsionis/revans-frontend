@@ -5,7 +5,7 @@ import { computed } from 'vue'
 export function useFriendship() {
   const friendshipsStore = useFriendshipsStore()
 
-  const onlineFriendsCounter = computed(() => friendshipsStore.friendships.filter(friend => friend.availability === UserAvailability.ONLINE).length)
+  const onlineFriendsCounter = computed(() => friendshipsStore.friendships.filter(friend => friend.availability !== UserAvailability.OFFLINE).length)
   const friendRequestsCounter = computed(() => friendshipsStore.friendRequests.length)
 
   return { onlineFriendsCounter, friendRequestsCounter }

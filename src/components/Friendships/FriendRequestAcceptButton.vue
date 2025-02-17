@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue'
 import { socket } from '@/socket'
-import { Icon } from '@iconify/vue'
+import { UserPlus2Icon } from 'lucide-vue-next'
 
 const props = defineProps({
   id: String,
@@ -14,6 +14,6 @@ function acceptFriendRequest() {
 
 <template>
   <Button size="icon" title="Accept" @click="acceptFriendRequest">
-    <Icon icon="ic:round-done" />
+    <UserPlus2Icon />
   </Button>
 </template>

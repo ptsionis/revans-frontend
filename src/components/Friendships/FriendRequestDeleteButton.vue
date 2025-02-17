@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue'
 import { socket } from '@/socket'
-import { Icon } from '@iconify/vue'
+import { Trash2Icon } from 'lucide-vue-next'
 
 const props = defineProps({
   id: String,
@@ -14,6 +14,6 @@ function deleteFriendRequest() {
 
 <template>
   <Button size="icon" title="Delete" @click="deleteFriendRequest">
-    <Icon icon="ic:round-delete" />
+    <Trash2Icon />
   </Button>
 </template>
