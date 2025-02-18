@@ -7,7 +7,6 @@ import { Loader2Icon } from 'lucide-vue-next'
 import { computed } from 'vue'
 import ChallengeAcceptButton from './ChallengeAcceptButton.vue'
 import ChallengeCancelButton from './ChallengeCancelButton.vue'
-import ChallengeDeclineButton from './ChallengeDeclineButton.vue'
 import ChallengeInfoSlot from './ChallengeInfoSlot.vue'
 
 const userStore = useUserStore()
@@ -37,6 +36,6 @@ const opponent = computed<UserInterface>(() => {
   </div>
   <div v-else class="flex justify-center items-center space-x-12">
     <ChallengeAcceptButton />
-    <ChallengeDeclineButton />
+    <ChallengeCancelButton />
   </div>
 </template>

@@ -61,10 +61,12 @@ function copyIdToClipboard() {
         </DialogDescription>
       </DialogHeader>
       <div class="flex flex-col justify-center items-start space-y-3">
-        <Avatar class="relative" size="base">
-          <AvatarImage :src="pictureUrl ?? ''" :alt="name" />
-          <AvatarFallback>{{ name.slice(0, 1) }}</AvatarFallback>
-        </Avatar>
+        <div class="w-full flex justify-center items-center">
+          <Avatar class="relative" size="base">
+            <AvatarImage :src="pictureUrl ?? ''" :alt="name" />
+            <AvatarFallback>{{ name.slice(0, 1) }}</AvatarFallback>
+          </Avatar>
+        </div>
         <div class="flex justify-center items-center text-2xl space-x-2">
           <User2Icon />
           <span class="font-light text-sm text-foreground/75">{{ name }}</span>
