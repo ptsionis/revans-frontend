@@ -10,8 +10,8 @@ export const useChallengeStore = defineStore('challenge', () => {
     id: '',
     challengerId: '',
     inviteeId: '',
-    isOpen: false,
   })
+  const challengeOpened = ref<boolean>(false)
   const userStore = useUserStore()
   const { toast } = useToast()
 
@@ -20,6 +20,12 @@ export const useChallengeStore = defineStore('challenge', () => {
   }
 
   function bindEvents() {
+    socket.on('challenge:opened', () => {
+      challengeOpened.value = true
+      toast({
+        description: 'A challenge has been opened.',
+      })
+    })
     socket.on('challenge:created', (data: ChallengeInterface) => {
       setChallengeStore(data)
       toast({
@@ -42,9 +48,9 @@ export const useChallengeStore = defineStore('challenge', () => {
       id: '',
       challengerId: '',
       inviteeId: '',
-      isOpen: false,
     }
+    challengeOpened.value = false
   }
 
-  return { challenge, setChallengeStore, bindEvents, $reset }
+  return { challenge, challengeOpened, setChallengeStore, bindEvents, $reset }
 })

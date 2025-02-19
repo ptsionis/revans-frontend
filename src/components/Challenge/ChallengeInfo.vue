@@ -15,7 +15,7 @@ const challengeStore = useChallengeStore()
 const amIChallenger = computed(() => challengeStore.challenge.challengerId === userStore.user.id)
 const opponent = computed<UserInterface>(() => {
   if (amIChallenger.value) {
-    return friendshipsStore.getFriendship(challengeStore.challenge.inviteeId ?? '') as UserInterface
+    return friendshipsStore.getFriendship(challengeStore.challenge.inviteeId) as UserInterface
   }
   return friendshipsStore.getFriendship(challengeStore.challenge.challengerId) as UserInterface
 })
