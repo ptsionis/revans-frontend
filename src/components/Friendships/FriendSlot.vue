@@ -10,6 +10,8 @@ defineProps<{
   availability?: string
   pictureUrl: string
   score: number
+  gamesPlayed: number
+  gamesWon: number
   createdAt: string
 }>()
 
@@ -18,7 +20,7 @@ const userStore = useUserStore()
 
 <template>
   <div class="flex justify-between items-center p-4 bg-background border border-muted">
-    <ProfileDialog :id="id" :availability="availability ?? UserAvailability.OFFLINE" :is-user-profile="false" :name="name" :picture-url="pictureUrl ?? ''" :score="score" :created-at="createdAt" />
+    <ProfileDialog :id="id" :availability="availability ?? UserAvailability.OFFLINE" :is-user-profile="false" :name="name" :picture-url="pictureUrl ?? ''" :score="score" :games-played="gamesPlayed" :games-won="gamesWon" :created-at="createdAt" />
     <div>
       <ChallengeButton v-if="availability === UserAvailability.ONLINE && userStore.user.availability === UserAvailability.ONLINE" :id="id" />
     </div>

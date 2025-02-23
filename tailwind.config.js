@@ -22,6 +22,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Delius', 'serif'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -65,6 +68,10 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        'toss': {
+          '0%': { transform: 'rotateY(0deg)' },
+          '100%': { transform: 'rotateY(360deg)' },
+        },
         'accordion-down': {
           from: { height: 0 },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -83,6 +90,7 @@ module.exports = {
         },
       },
       animation: {
+        'toss': 'toss 0.325s linear infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'collapsible-down': 'collapsible-down 0.2s ease-in-out',

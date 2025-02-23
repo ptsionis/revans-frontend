@@ -65,3 +65,10 @@ export function getRankName(score: number) {
     return 'GOAT'
   }
 }
+
+export function getWinrate(gamesPlayed: number, gamesWon: number) {
+  if (gamesPlayed === 0) {
+    return 0
+  }
+  return Math.round((gamesWon / gamesPlayed) * 100)
+}

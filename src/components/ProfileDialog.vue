@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import { useToast } from '@/components/ui/toast/use-toast'
 import { useUserStore } from '@/stores/user'
-import { getRankName } from '@/utils/rank'
+import { getRankName, getWinrate } from '@/utils/rank'
 import { CalendarDaysIcon, CopyIcon, HashIcon, TrophyIcon, User2Icon } from 'lucide-vue-next'
 
 const props = defineProps({
@@ -23,6 +23,8 @@ const props = defineProps({
   availability: { type: String, required: false },
   pictureUrl: String,
   score: { type: Number, required: true },
+  gamesPlayed: { type: Number, required: true },
+  gamesWon: { type: Number, required: true },
   createdAt: { type: String, required: true },
 })
 const userStore = useUserStore()
@@ -82,8 +84,8 @@ function copyIdToClipboard() {
         <div class="flex justify-center items-center text-2xl space-x-2">
           <TrophyIcon />
           <span class="font-light text-sm text-foreground/75">{{ getRankName(score) }}</span>
+          <span class="font-light text-sm text-foreground/75">({{ score }} points | {{ getWinrate(gamesPlayed, gamesWon) }}% winrate)</span>
           <RankIcon :rank="score" />
-          <span class="font-light text-sm text-foreground/75">({{ score }} points)</span>
         </div>
         <div v-if="userStore.user.id === id" class="flex justify-center items-center text-2xl space-x-2">
           <HashIcon />

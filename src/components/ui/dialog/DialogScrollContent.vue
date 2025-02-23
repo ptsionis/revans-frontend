@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DialogContentEmits, DialogContentProps } from 'radix-vue'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/cn'
 import { X } from 'lucide-vue-next'
 import {
   DialogClose,

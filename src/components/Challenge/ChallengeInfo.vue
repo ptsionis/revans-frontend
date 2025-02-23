@@ -5,9 +5,9 @@ import { useFriendshipsStore } from '@/stores/friendships'
 import { useUserStore } from '@/stores/user'
 import { Loader2Icon } from 'lucide-vue-next'
 import { computed } from 'vue'
+import PlayerInfoSlot from '../PlayerInfoSlot.vue'
 import ChallengeAcceptButton from './ChallengeAcceptButton.vue'
 import ChallengeCancelButton from './ChallengeCancelButton.vue'
-import ChallengeInfoSlot from './ChallengeInfoSlot.vue'
 
 const userStore = useUserStore()
 const friendshipsStore = useFriendshipsStore()
@@ -23,9 +23,9 @@ const opponent = computed<UserInterface>(() => {
 
 <template>
   <div class="flex justify-center items-center space-x-4">
-    <ChallengeInfoSlot :name="userStore.user.name" :picture-url="userStore.user.pictureUrl ?? undefined" />
+    <PlayerInfoSlot :name="userStore.user.name" :picture-url="userStore.user.pictureUrl ?? undefined" />
     <span>vs</span>
-    <ChallengeInfoSlot :name="opponent?.name" :picture-url="opponent.pictureUrl ?? undefined" />
+    <PlayerInfoSlot :name="opponent?.name" :picture-url="opponent.pictureUrl ?? undefined" />
   </div>
   <div v-if="amIChallenger" class="flex flex-col justify-center items-center space-y-6">
     <div class="flex justify-center items-center space-x-2 text-muted-foreground text-sm">
