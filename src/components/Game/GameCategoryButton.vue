@@ -21,7 +21,7 @@ function getQuestion() {
 </script>
 
 <template>
-  <Button class="w-full font-black text-md p-6" :title="`${category} X${level}`" :disabled="!gameStore.game.isUserTurn || gameStore.game.playedQuestions.some(question => question.category === category && question.level === level)" @click="getQuestion">
+  <Button class="w-full font-bold text-md py-6 px-2" :title="`${category} X${level}`" :disabled="!gameStore.game.isUserTurn || gameStore.game.playedQuestions.some(question => question.category === category && question.level === level)" @click="getQuestion">
     {{ category }} X{{ level }}
   </Button>
 </template>

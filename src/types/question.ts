@@ -7,6 +7,7 @@ export interface QuestionInterface {
   category: QuestionCategory
   level: QuestionLevel
   answers: string[]
+  createdAt: string
 }
 
 export interface PlayedQuestionInterface {

@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { useGameStore } from '@/stores/game'
 import GameAnswerButton from './GameAnswerButton.vue'
+import GameQuestionMetadata from './GameQuestionMetadata.vue'
 
 const gameStore = useGameStore()
 </script>
 
 <template>
-  <div class="w-full flex flex-col justify-center items-center space-y-12">
-    <h3 class="font-bold text-xl">
-      {{ gameStore.game.currentQuestion?.question }}
-    </h3>
-    <img class="w-36 rounded-md" src="https://tenereteam.s3.us-west-1.amazonaws.com/ac-milan-store-logo-6?v=1740358370" alt="">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+  <div class="w-full flex-1 flex flex-col justify-center items-center space-y-16">
+    <div class="flex flex-col justify-center items-center space-y-6">
+      <h3 class="font-extrabold text-xl text-center">
+        {{ gameStore.game.currentQuestion?.question }}
+      </h3>
+      <img v-if="gameStore.game.currentQuestion?.imageUrl" class="w-36 rounded-md" :src="gameStore.game.currentQuestion?.imageUrl" alt="">
+      <GameQuestionMetadata />
+    </div>
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
       <GameAnswerButton v-for="answer in gameStore.game.currentQuestion?.answers" :key="answer" :answer="answer" />
     </div>
   </div>

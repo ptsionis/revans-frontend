@@ -8,7 +8,9 @@ const levels = Object.values(QuestionLevel).filter(value => typeof value === 'nu
 </script>
 
 <template>
-  <div v-for="category in categories" :key="category" class="w-full flex flex-col md:flex-row justify-center items-center space-x-0 md:space-x-8 space-y-8 md:space-y-0">
-    <GameCategoryButton v-for="level in levels" :key="`${category}-${level}`" :category="category" :level="level" />
+  <div class="flex-1 flex flex-col justify-center items-center space-y-8">
+    <div v-for="category in categories" :key="category" class="w-full flex flex-col md:flex-row justify-center items-center space-x-0 md:space-x-8 space-y-8 md:space-y-0">
+      <GameCategoryButton v-for="level in levels" :key="`${category}-${level}`" :category="category" :level="level" />
+    </div>
   </div>
 </template>

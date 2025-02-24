@@ -28,6 +28,7 @@ export const useGameStore = defineStore('game', () => {
       category: QuestionCategory.DEFAULT,
       level: QuestionLevel.DEFAULT,
       answers: [],
+      createdAt: '',
     },
     playedQuestions: [],
   })
@@ -74,6 +75,7 @@ export const useGameStore = defineStore('game', () => {
         category: QuestionCategory.DEFAULT,
         level: QuestionLevel.DEFAULT,
         answers: [],
+        createdAt: '',
       },
       playedQuestions: [],
     }
