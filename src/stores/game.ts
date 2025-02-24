@@ -1,4 +1,5 @@
 import type { GameInterface } from '@/types/game'
+import type { PlayedQuestionInterface, QuestionInterface } from '@/types/question'
 import { QuestionCategory } from '@/enums/questionCategory'
 import { QuestionLevel } from '@/enums/questionLevel'
 import { socket } from '@/socket'
@@ -40,6 +41,12 @@ export const useGameStore = defineStore('game', () => {
     socket.on('game:init', (data: GameInterface) => {
       challengeStore.$reset()
       setGameStore(data)
+    })
+    socket.on('game:set_question', (data: QuestionInterface) => {
+      game.value.currentQuestion = data
+    })
+    socket.on('game:add_played_question', (data: PlayedQuestionInterface) => {
+      game.value.playedQuestions.push(data)
     })
     socket.on('disconnect', () => {
       $reset()

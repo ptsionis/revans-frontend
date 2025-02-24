@@ -49,7 +49,7 @@ function copyIdToClipboard() {
           </Avatar>
           <AvailabilityBadge v-if="availability" :id="name" :availability="availability" />
         </div>
-        <span v-if="!isUserProfile" class="font-light">{{ name }}</span>
+        <span v-if="!isUserProfile" class="max-w-[115px] font-light truncate">{{ name.split(' ')[0] }}</span>
         <div v-if="!isUserProfile" class="text-2xl">
           <RankIcon v-if="availability" :rank="score" />
         </div>

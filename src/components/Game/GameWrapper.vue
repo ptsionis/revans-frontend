@@ -18,7 +18,7 @@ setTimeout(() => {
     <div v-if="step === 'intro'" class="flex flex-col flex-1 justify-center items-center">
       <GamePlayersIntro :welcome-duration="welcomeDuration" :info-duration="infoDuration" :toss-duration="tossDuration" />
     </div>
-    <div v-else>
+    <div v-else class="flex flex-col justify-center items-center flex-1">
       <GameMain />
     </div>
   </Transition>

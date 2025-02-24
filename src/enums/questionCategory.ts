@@ -5,5 +5,5 @@ export enum QuestionCategory {
   FINANCE = 'FINANCE',
   LOGO = 'LOGO',
   TRIVIA = 'TRIVIA',
-  HIDDEN = 'HIDDEN',
+  SECRET = 'SECRET',
 }
