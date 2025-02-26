@@ -19,6 +19,12 @@
     --muted-foreground: 240 5% 64.9%;
     --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
+    --success: 150, 96%, 45%;
+    --success-foreground: 240 5.9% 10%;
+    --warning: 51, 100%, 56%;
+    --warning-foreground: 240 5.9% 10%;
+    --danger: 357, 96%, 58%;
+    --danger-foreground: 240 5.9% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;

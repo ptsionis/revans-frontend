@@ -5,9 +5,8 @@ import FriendshipsDialog from '@/components/Friendships/FriendshipsDialog.vue'
 import GameWrapper from '@/components/Game/GameWrapper.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
 import PlayButton from '@/components/PlayButton.vue'
-import ProfileDialog from '@/components/ProfileDialog.vue'
+import ProfileDialog from '@/components/Profile/ProfileDialog.vue'
 import Toaster from '@/components/ui/toast/Toaster.vue'
-import { UserAvailability } from '@/enums/userAvailability'
 import { socket } from '@/socket'
 import { useChallengeStore } from '@/stores/challenge'
 import { useConnectionStore } from '@/stores/connection'
@@ -49,7 +48,7 @@ gameStore.bindEvents()
         </div>
       </div>
       <div class="w-full flex justify-center items-center self-end space-x-8">
-        <ProfileDialog :id="userStore.user.id" :availability="userStore.user.availability ?? UserAvailability.OFFLINE" :is-user-profile="true" :name="userStore.user.name" :picture-url="userStore.user.pictureUrl ?? ''" :score="userStore.user.score" :games-played="userStore.user.gamesPlayed" :games-won="userStore.user.gamesWon" :created-at="userStore.user.createdAt" />
+        <ProfileDialog :profile="userStore.user" :is-user-profile="true" />
         <FriendshipsDialog />
         <LogoutButton />
       </div>

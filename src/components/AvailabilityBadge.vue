@@ -8,13 +8,13 @@ const props = defineProps<{
 function getAvailabilityColor() {
   switch (props.availability) {
     case UserAvailability.ONLINE:
-      return 'bg-green-400'
+      return 'bg-success'
     case UserAvailability.PENDING:
-      return 'bg-yellow-400'
+      return 'bg-warning'
     case UserAvailability.INGAME:
-      return 'bg-red-400'
+      return 'bg-danger'
     default:
-      return 'bg-gray-400'
+      return 'bg-muted'
   }
 }
 </script>

@@ -1,6 +1,8 @@
+import type { UserInterface } from '@/types/user'
+import { QuestionCategory } from '@/enums/questionCategory'
 import { Ranks } from '@/enums/ranks'
 
-export function getRankIconString(score: number) {
+export function getRankIconString(score: number): string {
   if (score < Ranks.RANK1) {
     return 'noto:baby-chick'
   }
@@ -33,7 +35,7 @@ export function getRankIconString(score: number) {
   }
 }
 
-export function getRankName(score: number) {
+export function getRankName(score: number): string {
   if (score < Ranks.RANK1) {
     return 'Newbie'
   }
@@ -66,9 +68,40 @@ export function getRankName(score: number) {
   }
 }
 
-export function getWinrate(gamesPlayed: number, gamesWon: number) {
+export function getWinrate(gamesPlayed: number, gamesWon: number): number {
   if (gamesPlayed === 0) {
     return 0
   }
   return Math.round((gamesWon / gamesPlayed) * 100)
+}
+
+export function getCategoryWinrate(profile: UserInterface, category: QuestionCategory): number {
+  switch (category) {
+    case QuestionCategory.HISTORY:
+      if (profile.historyPlayed === 0)
+        return 0
+      return Math.round(profile.historyWon / profile.historyPlayed * 100)
+    case QuestionCategory.GEOGRAPHY:
+      if (profile.geographyPlayed === 0)
+        return 0
+      return Math.round(profile.geographyWon / profile.geographyPlayed * 100)
+    case QuestionCategory.FINANCE:
+      if (profile.financePlayed === 0)
+        return 0
+      return Math.round(profile.financeWon / profile.financePlayed * 100)
+    case QuestionCategory.LOGO:
+      if (profile.logoPlayed === 0)
+        return 0
+      return Math.round(profile.logoWon / profile.logoPlayed * 100)
+    case QuestionCategory.TRIVIA:
+      if (profile.triviaPlayed === 0)
+        return 0
+      return Math.round(profile.triviaWon / profile.triviaPlayed * 100)
+    case QuestionCategory.SECRET:
+      if (profile.secretPlayed === 0)
+        return 0
+      return Math.round(profile.secretWon / profile.secretWon)
+    default:
+      return 0
+  }
 }

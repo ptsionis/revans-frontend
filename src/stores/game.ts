@@ -1,5 +1,6 @@
-import type { GameInterface } from '@/types/game'
+import type { GameInterface, GamePointsInterface } from '@/types/game'
 import type { PlayedQuestionInterface, QuestionInterface } from '@/types/question'
+import { useToast } from '@/components/ui/toast/use-toast'
 import { QuestionCategory } from '@/enums/questionCategory'
 import { QuestionLevel } from '@/enums/questionLevel'
 import { socket } from '@/socket'
@@ -33,6 +34,7 @@ export const useGameStore = defineStore('game', () => {
     playedQuestions: [],
   })
   const challengeStore = useChallengeStore()
+  const { toast } = useToast()
 
   function setGameStore(data: GameInterface) {
     game.value = data
@@ -48,6 +50,38 @@ export const useGameStore = defineStore('game', () => {
     })
     socket.on('game:add_played_question', (data: PlayedQuestionInterface) => {
       game.value.playedQuestions.push(data)
+    })
+    socket.on('game:answer_selected', (data: string) => {
+      game.value.selectedAnswer = data
+    })
+    socket.on('game:answer_reveal', (data: string) => {
+      game.value.correctAnswer = data
+    })
+    socket.on('game:update_points_user', (data: number) => {
+      game.value.userPoints = data
+    })
+    socket.on('game:update_points', (data: GamePointsInterface) => {
+      data.userId === game.value.opponent.id ? game.value.opponentPoints = data.userPoints : game.value.userPoints = data.userPoints
+    })
+    socket.on('game:next_round', (data: string) => {
+      game.value.currentQuestion = {
+        question: '',
+        category: QuestionCategory.DEFAULT,
+        level: QuestionLevel.DEFAULT,
+        answers: [],
+        createdAt: '',
+      }
+      game.value.selectedAnswer = ''
+      game.value.correctAnswer = ''
+      game.value.isUserTurn = data !== game.value.opponent.id
+    })
+    socket.on('game:cancelled', () => {
+      $reset()
+      toast({
+        variant: 'destructive',
+        title: 'Opponent quit!',
+        description: 'You have won.',
+      })
     })
     socket.on('disconnect', () => {
       $reset()

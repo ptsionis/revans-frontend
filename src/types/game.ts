@@ -9,5 +9,12 @@ export interface GameInterface {
   userPoints: number
   opponentPoints: number
   currentQuestion?: QuestionInterface
+  selectedAnswer?: string
+  correctAnswer?: string
   playedQuestions: PlayedQuestionInterface[]
+}
+
+export interface GamePointsInterface {
+  userId: string
+  userPoints: number
 }

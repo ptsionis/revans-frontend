@@ -32,16 +32,16 @@ export const useChallengeStore = defineStore('challenge', () => {
         description: data.challengerId === userStore.user.id ? 'Challenge has been sent.' : 'You have been challenged.',
       })
     })
-    socket.on('challenge:cancelled', () => {
-      $reset()
-      toast({
-        description: 'Challenge has been cancelled.',
-      })
-    })
     socket.on('challenge:error', () => {
       toast({
         variant: 'destructive',
         description: 'An error occurred while processing the challenge.',
+      })
+    })
+    socket.on('challenge:cancelled', () => {
+      $reset()
+      toast({
+        description: 'Challenge has been cancelled.',
       })
     })
     socket.on('disconnect', () => {

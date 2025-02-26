@@ -20,6 +20,13 @@ export const useFriendshipsStore = defineStore('friendships', () => {
     return friendships.value.find(friend => friend.id === id)
   }
 
+  function updateFriendship(friend: UserInterface) {
+    const index = friendships.value.findIndex(f => f.id === friend.id)
+    if (index !== -1) {
+      friendships.value[index] = friend
+    }
+  }
+
   function addFriendship(friend: UserInterface) {
     friendships.value.push(friend)
     sortFriendships()
@@ -85,6 +92,9 @@ export const useFriendshipsStore = defineStore('friendships', () => {
     socket.on('friend:availability', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
       setFriendAvailability(friendId, availability)
     })
+    socket.on('friend:update_friend', (data: UserInterface) => {
+      updateFriendship(data)
+    })
     socket.on('friendship:friend_request_sent', () => {
       toast({
         title: 'Friend request sent!',
@@ -127,5 +137,5 @@ export const useFriendshipsStore = defineStore('friendships', () => {
     friendRequests.value = []
   }
 
-  return { friendships, friendRequests, setFriendshipsStore, getFriendship, addFriendship, removeFriendship, setFriendAvailability, setFriendRequestsStore, addFriendRequest, removeFriendRequest, bindEvents, $reset }
+  return { friendships, friendRequests, setFriendshipsStore, getFriendship, updateFriendship, addFriendship, removeFriendship, setFriendAvailability, setFriendRequestsStore, addFriendRequest, removeFriendRequest, bindEvents, $reset }
 })
