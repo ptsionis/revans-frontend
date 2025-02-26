@@ -19,6 +19,8 @@ const props = defineProps<{
 
 const userStore = useUserStore()
 const { toast } = useToast()
+const sectionWrapperClass = 'flex justify-start items-center text-2xl space-x-2 p-4 bg-background border border-muted'
+const sectionTextClass = 'font-light text-sm text-foreground/75'
 
 function copyIdToClipboard() {
   navigator.clipboard.writeText(props.id)
@@ -30,27 +32,27 @@ function copyIdToClipboard() {
 
 <template>
   <ScrollArea class="w-full h-[170px] py-4">
-    <div class="flex justify-start items-center text-2xl space-x-2 p-4 bg-background border border-muted">
+    <div :class="sectionWrapperClass">
       <User2Icon />
-      <span class="font-light text-sm text-foreground/75">{{ name }}</span>
+      <span :class="sectionTextClass">{{ name }}</span>
     </div>
-    <div class="flex justify-start items-center text-2xl space-x-2 p-4 bg-background border border-muted">
+    <div :class="sectionWrapperClass">
       <CalendarDaysIcon />
-      <span class="font-light text-sm text-foreground/75">Joined {{ new Date(createdAt).toLocaleDateString("en-US", {
+      <span :class="sectionTextClass">Joined {{ new Date(createdAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
       }) }}</span>
     </div>
-    <div class="flex justify-start items-center text-2xl space-x-2 p-4 bg-background border border-muted">
+    <div :class="sectionWrapperClass">
       <TrophyIcon />
-      <span class="font-light text-sm text-foreground/75">{{ getRankName(score) }}</span>
+      <span :class="sectionTextClass">{{ getRankName(score) }}</span>
       <RankIcon :rank="score" />
-      <span class="font-light text-sm text-foreground/75">[ {{ score }} GP | {{ getWinrate(gamesPlayed, gamesWon) }}% WR ]</span>
+      <span :class="sectionTextClass">[ {{ score }} GP | {{ getWinrate(gamesPlayed, gamesWon) }}% WR ]</span>
     </div>
-    <div v-if="userStore.user.id === id" class="flex justify-start items-center text-2xl space-x-2 p-4 bg-background border border-muted">
+    <div v-if="userStore.user.id === id" :class="sectionWrapperClass">
       <HashIcon />
-      <span class="font-light text-sm text-foreground/75">{{ id }}</span>
+      <span :class="sectionTextClass">{{ id }}</span>
       <Button size="icon" title="Copy" @click="copyIdToClipboard">
         <CopyIcon class="cursor-pointer" />
       </Button>
