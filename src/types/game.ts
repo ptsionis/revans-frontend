@@ -12,6 +12,7 @@ export interface GameInterface {
   selectedAnswer?: string
   correctAnswer?: string
   playedQuestions: PlayedQuestionInterface[]
+  timer: number
 }
 
 export interface GamePointsInterface {

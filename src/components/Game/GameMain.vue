@@ -3,6 +3,7 @@ import GameAllCategories from '@/components/Game/GameAllCategories.vue'
 import GameBoard from '@/components/Game/GameBoard.vue'
 import { useGameStore } from '@/stores/game'
 import GameQuestion from './GameQuestion.vue'
+import GameTimer from './GameTimer.vue'
 
 const gameStore = useGameStore()
 </script>
@@ -12,5 +13,6 @@ const gameStore = useGameStore()
     <GameBoard />
     <GameAllCategories v-if="!gameStore.game.currentQuestion?.question" />
     <GameQuestion v-else />
+    <GameTimer />
   </div>
 </template>

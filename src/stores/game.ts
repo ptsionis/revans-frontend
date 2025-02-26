@@ -32,7 +32,9 @@ export const useGameStore = defineStore('game', () => {
       createdAt: '',
     },
     playedQuestions: [],
+    timer: 90,
   })
+  const timerInterval = ref<number | null>(null)
   const challengeStore = useChallengeStore()
   const { toast } = useToast()
 
@@ -40,10 +42,31 @@ export const useGameStore = defineStore('game', () => {
     game.value = data
   }
 
+  const startCountdown = (duration: number) => {
+    if (timerInterval !== null) {
+      if (timerInterval.value !== null)
+        clearInterval(timerInterval.value)
+    }
+
+    game.value.timer = duration
+
+    timerInterval.value = setInterval(() => {
+      if (game.value.timer > 0) {
+        game.value.timer--
+      }
+      else {
+        if (timerInterval.value !== null)
+          clearInterval(timerInterval.value)
+        timerInterval.value = null
+      }
+    }, 1000)
+  }
+
   function bindEvents() {
     socket.on('game:init', (data: GameInterface) => {
       challengeStore.$reset()
       setGameStore(data)
+      startCountdown(90)
     })
     socket.on('game:set_question', (data: QuestionInterface) => {
       game.value.currentQuestion = data
@@ -74,6 +97,8 @@ export const useGameStore = defineStore('game', () => {
       game.value.selectedAnswer = ''
       game.value.correctAnswer = ''
       game.value.isUserTurn = data !== game.value.opponent.id
+      game.value.timer = 90
+      startCountdown(90)
     })
     socket.on('game:cancelled', () => {
       $reset()
@@ -112,6 +137,7 @@ export const useGameStore = defineStore('game', () => {
         createdAt: '',
       },
       playedQuestions: [],
+      timer: 90,
     }
   }
 
