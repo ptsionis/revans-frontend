@@ -8,7 +8,7 @@ function challengeOpen() {
 </script>
 
 <template>
-  <Button class="rounded text-xl font-bold" size="xl" @click="challengeOpen">
+  <Button class="rounded text-lg" size="xl" @click="challengeOpen">
     PLAY
   </Button>
 </template>

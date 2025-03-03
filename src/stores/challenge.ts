@@ -5,29 +5,24 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useUserStore } from './user'
 
-export const useChallengeStore = defineStore('challenge', () => {
-  const challenge = ref<ChallengeInterface>({
-    id: '',
-    challengerId: '',
-    inviteeId: '',
-  })
-  const challengeOpened = ref<boolean>(false)
-  const userStore = useUserStore()
-  const { toast } = useToast()
+const userStore = useUserStore()
+const { toast } = useToast()
+const defaultChallengeState: ChallengeInterface = {
+  id: '',
+  challengerId: '',
+  inviteeId: '',
+}
 
-  function setChallengeStore(data: ChallengeInterface) {
-    challenge.value = data
-  }
+export const useChallengeStore = defineStore('challenge', () => {
+  const challenge = ref<ChallengeInterface>({ ...defaultChallengeState })
+  const challengeOpened = ref<boolean>(false)
 
   function bindEvents() {
     socket.on('challenge:opened', () => {
       challengeOpened.value = true
-      toast({
-        description: 'A challenge has been opened.',
-      })
     })
     socket.on('challenge:created', (data: ChallengeInterface) => {
-      setChallengeStore(data)
+      challenge.value = data
       toast({
         description: data.challengerId === userStore.user.id ? 'Challenge has been sent.' : 'You have been challenged.',
       })
@@ -44,19 +39,18 @@ export const useChallengeStore = defineStore('challenge', () => {
         description: 'Challenge has been cancelled.',
       })
     })
+    socket.on('game:init', () => {
+      $reset()
+    })
     socket.on('disconnect', () => {
       $reset()
     })
   }
 
   function $reset() {
-    challenge.value = {
-      id: '',
-      challengerId: '',
-      inviteeId: '',
-    }
+    challenge.value = { ...defaultChallengeState }
     challengeOpened.value = false
   }
 
-  return { challenge, challengeOpened, setChallengeStore, bindEvents, $reset }
+  return { challenge, challengeOpened, bindEvents }
 })

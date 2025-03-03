@@ -6,15 +6,11 @@ import { socket } from '@/socket'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+const { toast } = useToast()
+
 export const useFriendshipsStore = defineStore('friendships', () => {
   const friendships = ref<UserInterface[]>([])
   const friendRequests = ref<UserInterface[]>([])
-  const { toast } = useToast()
-
-  function setFriendshipsStore(data: UserInterface[]) {
-    friendships.value = data
-    sortFriendships()
-  }
 
   function getFriendship(id: string) {
     return friendships.value.find(friend => friend.id === id)
@@ -32,12 +28,12 @@ export const useFriendshipsStore = defineStore('friendships', () => {
     sortFriendships()
   }
 
-  function removeFriendship(id: string) {
-    const index = friendships.value.findIndex(friend => friend.id === id)
-    if (index !== -1) {
-      friendships.value.splice(index, 1)
-    }
-  }
+  // function removeFriendship(id: string) {
+  //   const index = friendships.value.findIndex(friend => friend.id === id)
+  //   if (index !== -1) {
+  //     friendships.value.splice(index, 1)
+  //   }
+  // }
 
   function setFriendAvailability(id: string, availability: UserAvailability) {
     const friend = friendships.value.find(friend => friend.id === id)
@@ -56,11 +52,6 @@ export const useFriendshipsStore = defineStore('friendships', () => {
       }
       return a.name.localeCompare(b.name)
     })
-  }
-
-  function setFriendRequestsStore(data: UserInterface[]) {
-    friendRequests.value = data
-    sortFriendRequests()
   }
 
   function addFriendRequest(friend: UserInterface) {
@@ -84,10 +75,12 @@ export const useFriendshipsStore = defineStore('friendships', () => {
 
   function bindEvents() {
     socket.on('user:set_friends', (data: UserInterface[]) => {
-      setFriendshipsStore(data)
+      friendships.value = data
+      sortFriendships()
     })
     socket.on('user:set_friend_requests', (data: UserInterface[]) => {
-      setFriendRequestsStore(data)
+      friendRequests.value = data
+      sortFriendRequests()
     })
     socket.on('friend:availability', ({ friendId, availability }: { friendId: string, availability: UserAvailability }) => {
       setFriendAvailability(friendId, availability)
@@ -137,5 +130,5 @@ export const useFriendshipsStore = defineStore('friendships', () => {
     friendRequests.value = []
   }
 
-  return { friendships, friendRequests, setFriendshipsStore, getFriendship, updateFriendship, addFriendship, removeFriendship, setFriendAvailability, setFriendRequestsStore, addFriendRequest, removeFriendRequest, bindEvents, $reset }
+  return { friendships, friendRequests, getFriendship, bindEvents }
 })

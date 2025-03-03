@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { UserInterface } from '@/types/user'
 import AvailabilityBadge from '@/components/AvailabilityBadge.vue'
-import RankIcon from '@/components/RankIcon.vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Dialog,
@@ -33,9 +32,6 @@ defineProps<{
           <AvailabilityBadge v-if="profile.availability" :id="profile.name" :availability="profile.availability" />
         </div>
         <span v-if="!isUserProfile" class="max-w-[115px] font-light truncate">{{ profile.name.split(' ')[0] }}</span>
-        <div v-if="!isUserProfile" class="text-2xl">
-          <RankIcon v-if="profile.availability" :rank="profile.score" />
-        </div>
       </div>
     </DialogTrigger>
     <DialogContent class="py-12 h-[400px] items-start">

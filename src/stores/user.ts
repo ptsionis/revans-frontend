@@ -5,39 +5,37 @@ import { socket } from '@/socket'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useUserStore = defineStore('user', () => {
-  const user = ref<UserInterface>({
-    id: '',
-    role: UserRole.USER,
-    name: '',
-    pictureUrl: '',
-    score: 0,
-    gamesPlayed: 0,
-    gamesWon: 0,
-    historyPlayed: 0,
-    historyWon: 0,
-    geographyPlayed: 0,
-    geographyWon: 0,
-    financePlayed: 0,
-    financeWon: 0,
-    logoPlayed: 0,
-    logoWon: 0,
-    triviaPlayed: 0,
-    triviaWon: 0,
-    secretPlayed: 0,
-    secretWon: 0,
-    createdAt: '',
-    availability: UserAvailability.OFFLINE,
-  })
-  const onlineUsersCounter = ref<number>(0)
+const defaultUserState: UserInterface = {
+  id: '',
+  role: UserRole.USER,
+  name: '',
+  pictureUrl: '',
+  score: 0,
+  gamesPlayed: 0,
+  gamesWon: 0,
+  historyPlayed: 0,
+  historyWon: 0,
+  geographyPlayed: 0,
+  geographyWon: 0,
+  financePlayed: 0,
+  financeWon: 0,
+  logoPlayed: 0,
+  logoWon: 0,
+  triviaPlayed: 0,
+  triviaWon: 0,
+  secretPlayed: 0,
+  secretWon: 0,
+  createdAt: '',
+  availability: UserAvailability.OFFLINE,
+}
 
-  function setUserStore(data: UserInterface) {
-    user.value = data
-  }
+export const useUserStore = defineStore('user', () => {
+  const user = ref<UserInterface>({ ...defaultUserState })
+  const onlineUsersCounter = ref<number>(0)
 
   function bindEvents() {
     socket.on('user:set', (data: UserInterface) => {
-      setUserStore(data)
+      user.value = data
     })
     socket.on('user:availability', (availability: UserAvailability) => {
       user.value.availability = availability
@@ -54,31 +52,9 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function $reset() {
-    user.value = {
-      id: '',
-      role: UserRole.USER,
-      name: '',
-      pictureUrl: '',
-      score: 0,
-      gamesPlayed: 0,
-      gamesWon: 0,
-      historyPlayed: 0,
-      historyWon: 0,
-      geographyPlayed: 0,
-      geographyWon: 0,
-      financePlayed: 0,
-      financeWon: 0,
-      logoPlayed: 0,
-      logoWon: 0,
-      triviaPlayed: 0,
-      triviaWon: 0,
-      secretPlayed: 0,
-      secretWon: 0,
-      createdAt: '',
-      availability: UserAvailability.OFFLINE,
-    }
+    user.value = { ...defaultUserState }
     onlineUsersCounter.value = 0
   }
 
-  return { user, onlineUsersCounter, setUserStore, bindEvents, $reset }
+  return { user, onlineUsersCounter, bindEvents }
 })

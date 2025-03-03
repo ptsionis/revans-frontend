@@ -2,7 +2,7 @@
 import ChallengeDialog from '@/components/Challenge/ChallengeDialog.vue'
 import Footer from '@/components/Footer.vue'
 import FriendshipsDialog from '@/components/Friendships/FriendshipsDialog.vue'
-import GameWrapper from '@/components/Game/GameWrapper.vue'
+import Game from '@/components/Game/Game.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
 import PlayButton from '@/components/PlayButton.vue'
 import ProfileDialog from '@/components/Profile/ProfileDialog.vue'
@@ -56,7 +56,7 @@ gameStore.bindEvents()
       <ChallengeDialog />
     </main>
     <main v-else class="w-full flex flex-col flex-1 px-12 py-8">
-      <GameWrapper />
+      <Game />
     </main>
     <Footer />
   </div>

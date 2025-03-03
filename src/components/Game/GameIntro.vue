@@ -4,6 +4,7 @@ import PlayerInfoSlot from '@/components/PlayerInfoSlot.vue'
 import { useGameStore } from '@/stores/game'
 import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
+import FadeTransition from '../FadeTransition.vue'
 
 const props = defineProps<{
   welcomeDuration: number
@@ -29,7 +30,7 @@ setTimeout(() => {
 </script>
 
 <template>
-  <Transition appear name="fade" mode="out-in">
+  <FadeTransition>
     <span v-if="step === 'welcome'">Game is starting...</span>
     <div v-else-if="step === 'info'" class="flex flex-col lg:flex-row justify-center items-center space-x-0 space-y-8 lg:space-x-8 lg:space-y-0">
       <PlayerInfoSlot :name="userStore.user.name" :picture-url="userStore.user.pictureUrl ?? undefined" />
@@ -37,14 +38,5 @@ setTimeout(() => {
       <PlayerInfoSlot :name="gameStore.game.opponent.name" :picture-url="gameStore.game.opponent?.pictureUrl ?? undefined" />
     </div>
     <GameCoinToss v-else-if="step === 'coinToss'" />
-  </Transition>
+  </FadeTransition>
 </template>
-
-<style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-</style>

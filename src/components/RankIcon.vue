@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useRank } from '@/composables/useRank'
-import { useUserStore } from '@/stores/user'
 import { Icon } from '@iconify/vue'
 
-const userStore = useUserStore()
+const props = defineProps<{
+  rank: number
+}>()
 
-const { rank } = useRank(userStore.user.score)
+const { rank } = useRank(props.rank)
 </script>
 
 <template>

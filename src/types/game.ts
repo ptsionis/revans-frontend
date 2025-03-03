@@ -13,9 +13,16 @@ export interface GameInterface {
   correctAnswer?: string
   playedQuestions: PlayedQuestionInterface[]
   timer: number
+  status: GameEndDTOInterface
 }
 
 export interface GamePointsInterface {
   userId: string
   userPoints: number
+}
+
+export interface GameEndDTOInterface {
+  state: null | 'intro' | 'categories' | 'question' | 'end'
+  winnerId: null | string
+  loserId: null | string
 }
