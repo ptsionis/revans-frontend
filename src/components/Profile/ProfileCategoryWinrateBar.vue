@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-expect-error - types not found
 import CircleProgress from 'vue3-circle-progress'
 import 'vue3-circle-progress/dist/circle-progress.css'
 
