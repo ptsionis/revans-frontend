@@ -11,7 +11,7 @@ const gameStore = useGameStore()
       {{ gameStore.game.currentQuestion?.category }}
     </Badge>
     <Badge class="font-extralight" variant="secondary">
-      X{{ gameStore.game.currentQuestion?.level }}
+      {{ gameStore.game.currentQuestion?.level }}
     </Badge>
     <Badge v-if="gameStore.game.currentQuestion?.createdAt" class="font-extralight" variant="secondary">
       {{ new Date(gameStore.game.currentQuestion?.createdAt).toLocaleDateString("en-US", {

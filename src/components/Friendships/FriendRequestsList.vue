@@ -10,7 +10,7 @@ const friendshipsStore = useFriendshipsStore()
   <ScrollArea class="w-full h-[200px] list-none rounded-none">
     <ul>
       <li v-for="request in friendshipsStore.friendRequests" :key="request.id">
-        <FriendRequestorSlot :id="request.id" :name="request.name" :availability="request.availability" :picture-url="request.pictureUrl ?? ''" :score="request.score" :games-played="request.gamesPlayed" :games-won="request.gamesWon" :created-at="request.createdAt" />
+        <FriendRequestorSlot :profile="request" />
       </li>
     </ul>
   </ScrollArea>

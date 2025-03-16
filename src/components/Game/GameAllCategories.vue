@@ -4,7 +4,7 @@ import { QuestionCategory } from '@/enums/questionCategory'
 import { QuestionLevel } from '@/enums/questionLevel'
 
 const categories = Object.values(QuestionCategory).filter(category => category !== '')
-const levels = Object.values(QuestionLevel).filter(value => typeof value === 'number').filter(level => level !== 0)
+const levels = Object.values(QuestionLevel).filter(level => level !== '')
 </script>
 
 <template>
