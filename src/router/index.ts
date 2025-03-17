@@ -25,6 +25,8 @@ router.beforeEach(async (to) => {
   const { isAuthenticated, checkAuth } = useAuth()
   await checkAuth()
 
+  console.log('isAuthenticated', isAuthenticated.value)
+
   if (!isAuthenticated.value && to.name !== 'login') {
     return { name: 'login' }
   }
