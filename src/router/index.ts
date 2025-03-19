@@ -1,5 +1,7 @@
 import { useAuth } from '@/composables/useAuth'
 import LoginView from '@/views/LoginView.vue'
+import PrivacyPolicyView from '@/views/PrivacyPolicyView.vue'
+import ToSView from '@/views/ToSView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -9,6 +11,16 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacy-policy',
+      component: PrivacyPolicyView,
+    },
+    {
+      path: '/tos',
+      name: 'tos',
+      component: ToSView,
     },
     {
       path: '/',
@@ -25,9 +37,7 @@ router.beforeEach(async (to) => {
   const { isAuthenticated, checkAuth } = useAuth()
   await checkAuth()
 
-  console.log('isAuthenticated', isAuthenticated.value)
-
-  if (!isAuthenticated.value && to.name !== 'login') {
+  if (!isAuthenticated.value && to.name === 'home') {
     return { name: 'login' }
   }
   if (isAuthenticated.value && to.name === 'login') {
