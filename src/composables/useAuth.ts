@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 
-export function useAuth() {
-  const isAuthenticated = ref<boolean>(false)
+const isAuthenticated = ref<boolean>(false)
 
+export function useAuth() {
   const checkAuth = async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_ORIGIN}/auth/is-authenticated`, {

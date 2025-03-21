@@ -3,6 +3,7 @@ import ChallengeDialog from '@/components/Challenge/ChallengeDialog.vue'
 import Footer from '@/components/Footer.vue'
 import FriendshipsDialog from '@/components/Friendships/FriendshipsDialog.vue'
 import Game from '@/components/Game/Game.vue'
+import Logo from '@/components/Logo.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
 import PlayButton from '@/components/PlayButton.vue'
 import ProfileDialog from '@/components/Profile/ProfileDialog.vue'
@@ -42,9 +43,12 @@ gameStore.bindEvents()
   <div class="min-h-dvh flex flex-col justify-center items-center">
     <main v-if="!gameStore.game.id" class="w-full flex flex-col flex-1 px-12 py-8">
       <div class="flex flex-col flex-1 justify-center items-center">
-        <div class="flex flex-col items-center space-y-2">
-          <PlayButton />
-          <span class="font-extralight text-xs text-foreground/75">Currently online: {{ userStore.onlineUsersCounter }}</span>
+        <div class="flex flex-col items-center space-y-8">
+          <Logo />
+          <div class="flex flex-col items-center space-y-2">
+            <PlayButton />
+            <span class="font-extralight text-xs text-foreground/75">Currently online: {{ userStore.onlineUsersCounter === 1 ? 'You' : userStore.onlineUsersCounter }}</span>
+          </div>
         </div>
       </div>
       <div class="w-full flex justify-center items-center self-end space-x-8">

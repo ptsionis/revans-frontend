@@ -2,7 +2,6 @@
 import Footer from '@/components/Footer.vue'
 import LoginButton from '@/components/LoginButton.vue'
 import Logo from '@/components/Logo.vue'
-import Separator from '@/components/ui/separator/Separator.vue'
 import { useAuth } from '@/composables/useAuth'
 
 const { loginWithGoogle } = useAuth()
@@ -12,14 +11,7 @@ const { loginWithGoogle } = useAuth()
   <div class="min-h-dvh flex flex-col justify-center items-center">
     <main class="w-full flex flex-col justify-center items-center flex-1 px-12 py-8">
       <div class="flex flex-col justify-center items-center space-y-12">
-        <div class="flex flex-col justify-center items-center space-y-4">
-          <Logo />
-          <h3 class="text-center">
-            Play real-time PvP football quizzes against your friends!
-          </h3>
-          <span class="text-danger text-center text-sm font-light">Revans is currently in Alpha version and game data may be lost!</span>
-        </div>
-        <Separator />
+        <Logo />
         <div class="flex flex-col flex-1 justify-center items-stretch space-y-4">
           <!-- <LoginButton text="Sign in with Facebook" icon="mdi:facebook" :callback="loginWithFacebook" /> -->
           <LoginButton text="Sign in with Google" icon="mdi:google" :callback="loginWithGoogle" />
