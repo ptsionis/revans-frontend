@@ -12,7 +12,7 @@ const gameStore = useGameStore()
       <h3 class="font-extrabold text-xl text-center">
         {{ gameStore.game.currentQuestion?.question }}
       </h3>
-      <img v-if="gameStore.game.currentQuestion?.imageUrl" class="w-36 rounded-md" :src="gameStore.game.currentQuestion?.imageUrl" alt="">
+      <img v-if="gameStore.game.currentQuestion?.imageUrl" class="w-36 rounded-md bg-secondary" :src="gameStore.game.currentQuestion?.imageUrl" alt="">
       <GameQuestionMetadata />
     </div>
     <div class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
