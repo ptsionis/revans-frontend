@@ -85,10 +85,10 @@ export function getCategoryWinrate(profile: UserInterface, category: QuestionCat
       if (profile.geographyPlayed === 0)
         return 0
       return Math.round(profile.geographyWon / profile.geographyPlayed * 100)
-    case QuestionCategory.FINANCE:
-      if (profile.financePlayed === 0)
+    case QuestionCategory.WHO_IS:
+      if (profile.whoIsPlayed === 0)
         return 0
-      return Math.round(profile.financeWon / profile.financePlayed * 100)
+      return Math.round(profile.whoIsWon / profile.whoIsPlayed * 100)
     case QuestionCategory.LOGO:
       if (profile.logoPlayed === 0)
         return 0

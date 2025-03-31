@@ -15,8 +15,8 @@ export interface UserInterface {
   historyWon: number
   geographyPlayed: number
   geographyWon: number
-  financePlayed: number
-  financeWon: number
+  whoIsPlayed: number
+  whoIsWon: number
   logoPlayed: number
   logoWon: number
   triviaPlayed: number
