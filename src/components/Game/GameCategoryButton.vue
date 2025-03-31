@@ -23,6 +23,6 @@ function getQuestion() {
 
 <template>
   <Button class="w-full font-bold text-md py-6 px-2" :title="`${category} X${level}`" :disabled="!gameStore.game.isUserTurn || gameStore.game.playedQuestions.some(question => question.category === category && question.level === level)" @click="getQuestion">
-    {{ category }} X{{ getQuestionLevelPoints(level) }}
+    {{ category.replace(/_/g, ' ') }} X{{ getQuestionLevelPoints(level) }}
   </Button>
 </template>
