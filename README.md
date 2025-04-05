@@ -1,33 +1,29 @@
-# revans-frontend
+# Revans
 
-This template should help get you started developing with Vue 3 in Vite.
+![Revans Preview](https://ymrqhudtxwcmmckneate.supabase.co/storage/v1/object/public/other//revans-preview.png)
 
-## Recommended IDE Setup
+Play a real-time PvP football quiz against your friends. A web-based application that allows users to play a football quiz game in real-time with their friends or other users. The game consists of multiple-choice questions related to football, and players can compete against each other to see who can answer the most questions correctly, climb the rank ladder and be the best among others.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Visit Revans
 
-## Type Support for `.vue` Imports in TS
+[www.revans.cc](https://revans.cc/)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Use Cases
+- Login via Google account, logout
+- See yours and your friends' profiles, ranks and stats
+- Add friends, send, accept, or decline friend requests
+- Invite friends to play a game, accept or decline game invites
+- Queue up to Quick Play, to play with random users
+- Play the game and answer questions
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Tech Stack
+- Vue 3
+- Tailwind CSS
+- shadcn/ui
+- Pinia
+- Node.js
+- Express.js
+- Socket.IO
+- Drizzle ORM
+- PostgreSQL
+- Redis
