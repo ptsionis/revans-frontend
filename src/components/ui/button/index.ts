@@ -11,11 +11,11 @@ export const buttonVariants = cva(
         default:
           'bg-primary text-primary-foreground shadow hover:bg-primary/90',
         success:
-          'bg-success text-success-foreground shadow-sm hover:bg-success/90',
+          'bg-success text-success-foreground shadow-sm',
         warning:
-          'bg-warning text-warning-foreground shadow-sm hover:bg-warning/90',
+          'bg-warning text-warning-foreground shadow-sm',
         danger:
-          'bg-danger text-danger-foreground shadow-sm hover:bg-danger/90',
+          'bg-danger text-danger-foreground shadow-sm',
         destructive:
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline:
