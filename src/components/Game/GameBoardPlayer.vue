@@ -10,7 +10,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div :class="`w-full px-4 flex justify-between items-center text-lg ${props.isUser ? '' : 'flex-row-reverse'}`">
+  <div :class="`w-full px-4 flex justify-between items-center ${props.isUser ? '' : 'flex-row-reverse'}`">
     <div :class="`flex items-center space-x-4 ${props.isUser ? '' : 'flex-row-reverse space-x-reverse'}`">
       <Avatar>
         <AvatarImage :src="pictureUrl ?? ''" :alt="name" />
@@ -18,6 +18,6 @@ const props = defineProps<{
       </Avatar>
       <span class="hidden md:block">{{ name.split(" ")[0] }}</span>
     </div>
-    <span class="font-black text-3xl">{{ points }}</span>
+    <span class="font-black text-2xl">{{ points }}</span>
   </div>
 </template>
