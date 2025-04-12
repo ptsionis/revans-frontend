@@ -59,7 +59,7 @@ gameStore.bindEvents()
       <Toaster />
       <ChallengeDialog />
     </main>
-    <main v-else class="w-full flex flex-col flex-1 px-12 py-8">
+    <main v-else class="w-full flex flex-col flex-1 px-0 pt-0 pb-8">
       <Game />
     </main>
     <Footer />

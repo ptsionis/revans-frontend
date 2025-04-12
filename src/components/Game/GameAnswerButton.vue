@@ -29,7 +29,7 @@ function answerQuestion() {
 </script>
 
 <template>
-  <Button :variant="buttonVariant" class="w-full text-md font-bold py-6 px-2" :disabled="!gameStore.game.isUserTurn || !!gameStore.game.selectedAnswer" @click="answerQuestion">
+  <Button :variant="buttonVariant" class="w-full text-sm md:text-md font-bold py-6 px-2" :disabled="!gameStore.game.isUserTurn || !!gameStore.game.selectedAnswer" @click="answerQuestion">
     {{ answer }}
   </Button>
 </template>

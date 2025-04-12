@@ -21,7 +21,7 @@ const isPinging = computed(() => {
 </script>
 
 <template>
-  <span class="absolute top-[50%] left-0 flex size-3">
+  <span class="fixed top-[50%] left-0 flex size-3">
     <span :class="`absolute rounded-r-full p-4 opacity-75 ${color} ${isPinging ? 'animate-ping' : ''}`" />
     <span :class="`relative size-3 rounded-r-full p-4 flex justify-center items-center font-bold ${color}`">{{ gameStore.game.isUserTurn ? gameStore.game.timer : '-' }}</span>
   </span>

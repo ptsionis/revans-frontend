@@ -7,9 +7,9 @@ const gameStore = useGameStore()
 </script>
 
 <template>
-  <div class="w-full flex-1 flex flex-col justify-center items-center space-y-16">
+  <div class="w-full flex-1 flex flex-col justify-center items-center px-12 space-y-16">
     <div class="flex flex-col justify-center items-center space-y-6">
-      <h3 class="font-extrabold text-xl text-center">
+      <h3 class="font-extrabold text-lg md:text-xl text-center">
         {{ gameStore.game.currentQuestion?.question }}
       </h3>
       <img v-if="gameStore.game.currentQuestion?.imageUrl" class="w-36 rounded-md bg-secondary" :src="gameStore.game.currentQuestion?.imageUrl" alt="">
