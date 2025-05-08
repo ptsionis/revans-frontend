@@ -100,7 +100,7 @@ export function getCategoryWinrate(profile: UserInterface, category: QuestionCat
     case QuestionCategory.SECRET:
       if (profile.secretPlayed === 0)
         return 0
-      return Math.round(profile.secretWon / profile.secretWon)
+      return Math.round(profile.secretWon / profile.secretPlayed * 100)
     default:
       return 0
   }

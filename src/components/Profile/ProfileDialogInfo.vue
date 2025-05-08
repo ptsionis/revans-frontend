@@ -48,7 +48,7 @@ function copyIdToClipboard() {
       <TrophyIcon />
       <span :class="sectionTextClass">{{ getRankName(score) }}</span>
       <RankIcon :rank="score" />
-      <span :class="sectionTextClass">[ {{ score }} GP | {{ getWinrate(gamesPlayed, gamesWon) }}% WR ]</span>
+      <span :class="sectionTextClass">[ {{ score }} GP | {{ gamesWon }} out of {{ gamesPlayed }} | {{ getWinrate(gamesPlayed, gamesWon) }}% WR ]</span>
     </div>
     <div v-if="userStore.user.id === id" :class="sectionWrapperClass">
       <HashIcon />
